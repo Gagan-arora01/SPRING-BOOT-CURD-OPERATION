@@ -39,4 +39,11 @@ public class StudentController {
     public void deleteStudent(@PathVariable Long id) {
         service.deleteStudent(id);
     }
+
+    @GetMapping("/search")
+    public List<Student> searchByName(@RequestParam String name) {
+        return service.getAllStudents().stream()
+                .filter(s -> s.getName().toLowerCase().contains(name.toLowerCase()))
+                .toList();
+    }
 }
